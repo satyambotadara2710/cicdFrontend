@@ -46,7 +46,7 @@ pipeline {
     post{
         always {
             bat "docker pull ${DOCKER_REPO}/${IMAGE_NAME}"
-            bat "docker run --detach --publish $PORT:8100 --name $CONTAINER_NAME ${DOCKER_REPO}/${IMAGE_NAME}"
+            bat ".\runcontainer.bat ${PORT} $CONTAINER_NAME  $DOCKER_REPO/$IMAGE_NAME"
         }
     }
 }
