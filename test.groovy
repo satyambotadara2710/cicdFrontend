@@ -1,4 +1,4 @@
-def testFun(String test){
- echo test;
+def testFun(){
+ echo "hello";
 }
 return this;
