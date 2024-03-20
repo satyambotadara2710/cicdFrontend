@@ -2,7 +2,7 @@ def DOCKER_REPO = 'satyambotadara2710'
 def IMAGE_NAME = 'crudangular'
 def PORT = 80
 def CONTAINER_NAME = 'cicdFrontend'
-def externalfile = load("./test.groovy")
+def externalfile
 pipeline {
     agent any
 
@@ -23,7 +23,8 @@ pipeline {
         stage('checkout') {
             tools { git 'Default' }
             steps {
-                externalfile.testFun("hello satyam ")
+                externalfile = load 'test.groovy'
+                externalfile.testFun();
                 git branch: 'main', url: 'https://github.com/satyambotadara2710/cicdFrontend.git'
 
             }
