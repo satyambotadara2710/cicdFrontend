@@ -23,11 +23,11 @@ pipeline {
         stage('checkout') {
             tools { git 'Default' }
             steps {
+                git branch: 'main', url: 'https://github.com/satyambotadara2710/cicdFrontend.git'
                 script(){
                     externalfile = load 'test.groovy'
                     externalfile.testFun();
                 }
-                git branch: 'main', url: 'https://github.com/satyambotadara2710/cicdFrontend.git'
 
             }
         }
