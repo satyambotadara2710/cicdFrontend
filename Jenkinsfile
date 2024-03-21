@@ -2,7 +2,7 @@ def DOCKER_REPO = 'satyambotadara2710'
 def IMAGE_NAME = 'crudangular'
 def PORT = 80
 def CONTAINER_NAME = 'cicdFrontend'
-def externalScript 
+def externalScript
 
 pipeline {
     agent any
@@ -28,9 +28,9 @@ pipeline {
             }
         }
 
-        stage('load external lib'){
-            steps{
-                script{
+        stage('load external lib') {
+            steps {
+                script {
                     externalScript = load 'Lib.groovy'
                 }
             }
@@ -47,16 +47,16 @@ pipeline {
         stage('push docker image') {
             steps {
                 script {
-                    externalScript.pushImageToRepo(DOCKERHUB_CRED_USR,DOCKERHUB_CRED_PSW,IMAGE_NAME,DOCKER_REPO);
+                    externalScript.pushImageToRepo(DOCKERHUB_CRED_USR, DOCKERHUB_CRED_PSW, IMAGE_NAME, DOCKER_REPO)
                 }
             }
         }
-    }
-    post {
-        always {
-            script{
-                externalScript = load 'Lib.groovy'
-                externalScript.runContainer(DOCKER_REPO,IMAGE_NAME,CONTAINER_NAME,PORT)
+        stage('run docker container') {
+            steps {
+                script {
+                    externalScript = load 'Lib.groovy'
+                    externalScript.runContainer(DOCKER_REPO, IMAGE_NAME, CONTAINER_NAME, PORT)
+                }
             }
         }
     }
