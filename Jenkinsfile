@@ -47,16 +47,16 @@ pipeline {
         stage('push docker image') {
             steps {
                 script {
-                    bat " docker login -u $DOCKERHUB_CRED_USR -p $DOCKERHUB_CRED_PSW"
-                    bat "docker push -a ${DOCKER_REPO}/${IMAGE_NAME}"
+                    externalScript.pushImageToRepo(DOCKERHUB_CRED_USR,DOCKERHUB_CRED_PSW,IMAGE_NAME,DOCKER_REPO);
                 }
             }
         }
     }
     post {
         always {
-            bat "docker pull ${DOCKER_REPO}/${IMAGE_NAME}"
-            bat ".\\runcontainer.bat ${PORT} $CONTAINER_NAME  $DOCKER_REPO/$IMAGE_NAME"
+            externalScript.runContainer(DOCKER_REPO,IMAGE_NAME,CONTAINER_NAME,PORT)
+            // bat "docker pull ${DOCKER_REPO}/${IMAGE_NAME}"
+            // bat ".\\runcontainer.bat ${PORT} $CONTAINER_NAME  $DOCKER_REPO/$IMAGE_NAME"
         }
     }
 }
