@@ -54,7 +54,6 @@ pipeline {
         stage('run docker container') {
             steps {
                 script {
-                    externalScript = load 'Lib.groovy'
                     externalScript.runContainer(DOCKER_REPO, IMAGE_NAME, CONTAINER_NAME, PORT)
                 }
             }
