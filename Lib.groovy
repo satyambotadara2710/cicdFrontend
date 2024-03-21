@@ -5,7 +5,7 @@ def pushImageToRepo(String userName,String password,String imagename,String dock
 }
 
 def buildDockerImage(String reponame,String imagename,String version){
-    bat "docker build -t "+ reponame+"/ "+imagename+": "+version+ "-t " +reponame+"/ "+imagename+":latest ."
+    bat "docker build -t "+ reponame+" / "+imagename+": "+version+ " -t " +reponame+" / "+imagename+":latest ."
 }
 def runContainer(String reponame,String imagename,String containername,String port){
     bat "docker pull $reponame/$imagename"
