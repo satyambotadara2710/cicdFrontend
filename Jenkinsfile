@@ -32,7 +32,7 @@ pipeline {
                 // bat "docker build -t ${DOCKER_REPO}/${IMAGE_NAME}:${params.imageVersion} -t ${DOCKER_REPO}/${IMAGE_NAME}:latest ."
                  script{
                    dockerbuild = load 'DockerBuild.groovy';
-                   dockerbuild.buildDockerImage($DOCKER_REPO,$IMAGE_NAME,${params.imageVersion})
+                   dockerbuild.buildDockerImage(DOCKER_REPO,IMAGE_NAME,params.imageVersion)
                }
             }
         }
