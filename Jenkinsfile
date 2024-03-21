@@ -2,7 +2,7 @@ def DOCKER_REPO = 'satyambotadara2710'
 def IMAGE_NAME = 'crudangular'
 def PORT = 80
 def CONTAINER_NAME = 'cicdFrontend'
-def externalfile
+def externalScript = load 'Lib.groovy'
 pipeline {
     agent any
 
@@ -29,16 +29,19 @@ pipeline {
 
         stage('build docker image') {
             steps {
-                // bat "docker build -t ${DOCKER_REPO}/${IMAGE_NAME}:${params.imageVersion} -t ${DOCKER_REPO}/${IMAGE_NAME}:latest ."
                  script{
-                   dockerbuild = load 'DockerBuild.groovy';
-                   dockerbuild.buildDockerImage(DOCKER_REPO,IMAGE_NAME,params.imageVersion)
+                //    dockerbuild = load 'DockerBuild.groovy';
+                   externalScript.buildDockerImage(DOCKER_REPO,IMAGE_NAME,params.imageVersion)
                }
             }
         }
 
         stage('push docker image') {
             steps {
+                script{
+                //    dockerPushScript = load 'PushDockerImage.groovy'
+                //    dockerPushScript.
+                // }
                 bat " docker login -u $DOCKERHUB_CRED_USR -p $DOCKERHUB_CRED_PSW"
                 bat "docker push -a ${DOCKER_REPO}/${IMAGE_NAME}"
             }
