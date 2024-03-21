@@ -12,4 +12,9 @@ def runContainer(String reponame,String imagename,String containername,String po
     bat "docker pull "+reponame+"/"+imagename
     bat ".\\runcontainer.bat "+port+" "+containername+" "+reponame+"/"+imagename
 }
+
+def hello(){
+    echo "hello world"
+}
+
 return this;
