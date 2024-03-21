@@ -57,8 +57,6 @@ pipeline {
             script{
                 externalScript.runContainer(DOCKER_REPO,IMAGE_NAME,CONTAINER_NAME,PORT)
             }
-            // bat "docker pull ${DOCKER_REPO}/${IMAGE_NAME}"
-            // bat ".\\runcontainer.bat ${PORT} $CONTAINER_NAME  $DOCKER_REPO/$IMAGE_NAME"
         }
     }
 }
